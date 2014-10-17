@@ -1,0 +1,23 @@
+.v-app div.lazy-loading {
+    border-color: rgba(0,0,0,0.05);
+    border-style: dashed;
+    border-width: 2px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.05);
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0.5;
+}
+
+div.lazy-loading div.v-progressbar-indeterminate {
+}
+
+.lazy-loading div.lazy-loading-message {
+    text-align: center;
+    color: #fff;
+    text-shadow: rgba(0,0,0,0.4) 0px 0px 3px;
+    width: 100%;
+    margin-top: 10px;
+}

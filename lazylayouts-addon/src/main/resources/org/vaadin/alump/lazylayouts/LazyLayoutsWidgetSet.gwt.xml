@@ -1,0 +1,16 @@
+<module>
+
+	<!-- WS Compiler: manually edited -->
+
+	<!-- Inherit DefaultWidgetSet -->
+	<inherits name="com.vaadin.DefaultWidgetSet" /> 
+
+	<!-- Widget styles in public -directory -->
+	<stylesheet src="lazylayouts.css"/>
+
+	<!-- Replacing client side widgets to allow hooking of scroll events -->
+	<replace-with class="org.vaadin.alump.lazylayouts.client.LazyPanel">
+		<when-type-is class="com.vaadin.client.ui.VPanel" />
+	</replace-with>
+
+</module>

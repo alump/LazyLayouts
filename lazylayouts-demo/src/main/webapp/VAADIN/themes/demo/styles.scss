@@ -1,0 +1,38 @@
+@import "../reindeer/reindeer.scss";
+
+$gray: #d1d1cf;
+$green: #40b527;
+$darkgreen: darken($green, 30%);
+
+// Prefix all selectors in your theme with .demo
+.demo {
+
+	// Include reindeer theme styles in your theme
+	@include reindeer;
+
+    .lazy-loaded-layout {
+
+
+    }
+
+  .header-label {
+    font-size: 16px;
+  }
+
+  .timestamp {
+    text-align: right;
+    color: gray;
+  }
+
+  .error-header {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .error-desc {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1;
+  }
+}

@@ -1,0 +1,5 @@
+*.iml
+.idea/
+lazylayouts-addon/target
+lazylayouts-demo/target
+lazylayouts-demo/src/main/webapp/VAADIN/widgetsets/
