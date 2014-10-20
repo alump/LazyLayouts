@@ -4,6 +4,10 @@ LazyLayout is an UI component add-on for Vaadin 7. It offers layouts that will p
 application logic. This allows to optimize DB queries to only provide handful of responses needed to view page full of
 results.
 
+## Build status
+
+[![Build Status](http://siika.fi:8888/jenkins/job/LazyLayouts%20(Vaadin)/badge/icon)](http://siika.fi:8888/jenkins/job/LazyLayouts%20(Vaadin)/)
+
 ## Online demo
 
 Try the add-on demo at http://siika.fi:8080/LazyLayoutsDemo

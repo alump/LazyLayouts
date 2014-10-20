@@ -27,7 +27,7 @@ public class MenuView extends VerticalLayout implements View {
             + "(including data used to generate view). This is demo and test application of this add-on.");
         addComponent(label);
 
-        Link link = new Link("Prosject page on GitHub", new ExternalResource("https://github.com/alump/LazyLayouts"));
+        Link link = new Link("Project page on GitHub", new ExternalResource("https://github.com/alump/LazyLayouts"));
         addComponent(link);
 
         addMenuButton("LazyVerticalLayout", "Demo and tests for LazyVerticalLayout", LazyVLView.VIEW_ID);
