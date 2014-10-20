@@ -232,4 +232,45 @@
 
 	</build>
 
+	<profiles>
+		<profile>
+			<id>faster</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.vaadin</groupId>
+						<artifactId>vaadin-maven-plugin</artifactId>
+						<version>${vaadin.plugin.version}</version>
+
+						<configuration>
+							<webappDirectory>src/main/webapp/VAADIN/widgetsets</webappDirectory>
+							<hostedWebapp>src/main/webapp/VAADIN/widgetsets</hostedWebapp>
+
+							<force>true</force>
+							<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+							<noServer>true</noServer>
+							<runTarget>http://localhost:8080</runTarget>
+							<port>8080</port>
+							<draftCompile>true</draftCompile>
+							<style>PRETTY</style>
+							<strict>true</strict>
+							<compileReport>false</compileReport>
+						</configuration>
+
+						<executions>
+							<execution>
+								<goals>
+									<goal>clean</goal>
+									<goal>resources</goal>
+									<goal>compile</goal>
+									<goal>test</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
