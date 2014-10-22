@@ -1,6 +1,7 @@
 package org.vaadin.alump.lazylayouts.client;
 
-import com.google.gwt.user.client.Element;
+
+import com.google.gwt.dom.client.Element;
 
 /**
  * Created by alump on 16/10/14.

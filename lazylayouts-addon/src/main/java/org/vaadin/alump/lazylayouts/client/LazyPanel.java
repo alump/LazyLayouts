@@ -1,7 +1,7 @@
 package org.vaadin.alump.lazylayouts.client;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.vaadin.client.ui.VPanel;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by alump on 16/10/14.
+ * Adds lazy scroll notifying to client side implementation of Vaadin Panel
  */
 public class LazyPanel extends VPanel implements LazyScrollNotifier {
 
@@ -22,7 +22,7 @@ public class LazyPanel extends VPanel implements LazyScrollNotifier {
         final int type = DOM.eventGetType(event);
         if (type == Event.ONSCROLL) {
             for(LazyScrollListener listener : scrollListeners) {
-                listener.onLazyScroll(contentNode);
+                listener.onLazyScroll(Element.as(contentNode));
             }
         }
     }
@@ -39,6 +39,6 @@ public class LazyPanel extends VPanel implements LazyScrollNotifier {
 
     @Override
     public Element getLazyScrollingElement() {
-        return contentNode;
+        return Element.as(contentNode);
     }
 }

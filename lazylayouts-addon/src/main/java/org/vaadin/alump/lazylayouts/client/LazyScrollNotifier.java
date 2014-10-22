@@ -1,6 +1,7 @@
 package org.vaadin.alump.lazylayouts.client;
 
-import com.google.gwt.user.client.Element;
+
+import com.google.gwt.dom.client.Element;
 
 /**
  * Client side extension interface to hook scrolling events to legacy Vaadin components (like Panel)

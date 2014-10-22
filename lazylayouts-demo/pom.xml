@@ -5,7 +5,7 @@
 	<groupId>org.vaadin.alump.lazylayouts</groupId>
 	<artifactId>lazylayouts-demo</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<name>LazyLayouts Demo</name>
 
 	<properties>
@@ -72,11 +72,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.vaadin.alump.lazylayouts</groupId>
-			<artifactId>lazylayouts-addon</artifactId>
-			<version>${version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-push</artifactId>
 			<version>${vaadin.version}</version>
@@ -96,6 +91,11 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.vaadin.alump.lazylayouts</groupId>
+			<artifactId>lazylayouts-addon</artifactId>
+			<version>${version}</version>
 		</dependency>
 	</dependencies>
 
