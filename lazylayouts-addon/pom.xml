@@ -5,12 +5,12 @@
 	<groupId>org.vaadin.alump.lazylayouts</groupId>
 	<artifactId>lazylayouts-addon</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<name>LazyLayouts</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>7.1.15</vaadin.version>
+		<vaadin.version>7.3.10</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 
 		<!-- ZIP Manifest fields -->

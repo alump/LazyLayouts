@@ -4,6 +4,7 @@ import com.vaadin.data.Property;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import org.vaadin.alump.lazylayouts.LazyComponentProvider;
 import org.vaadin.alump.lazylayouts.LazyComponentRequestEvent;
@@ -22,7 +23,8 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
     private Panel panel;
     private LazyVerticalLayout lazyLayout;
     private Navigator navigator;
-    private CheckBox manyCB;
+    private CheckBox singleCB;
+    private CheckBox fastCB;
     private CheckBox syncCB;
     private TextField startCountTF;
 
@@ -41,13 +43,14 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
         buttonLayout.setSpacing(true);
         addComponent(buttonLayout);
 
-        Button menu = new Button("Menu", new Button.ClickListener() {
+        Button menu = new Button(FontAwesome.BARS.getHtml(), new Button.ClickListener() {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 navigator.navigateTo(MenuView.VIEW_ID);
             }
         });
+        menu.setHtmlContentAllowed(true);
         menu.setDescription("Return to menu");
         buttonLayout.addComponent(menu);
 
@@ -62,18 +65,23 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
         reset.setDescription("Set layout back to original state");
         buttonLayout.addComponent(reset);
 
-        manyCB = new CheckBox("Load many");
-        manyCB.setDescription("If demo provider should one (false) or many (true) items when client sends request");
-        manyCB.setImmediate(true);
-        manyCB.addValueChangeListener(new Property.ValueChangeListener() {
+        singleCB = new CheckBox("Load one");
+        singleCB.setDescription("Only provide one new item at each load");
+        singleCB.setImmediate(true);
+        singleCB.addValueChangeListener(new Property.ValueChangeListener() {
             @Override
             public void valueChange(Property.ValueChangeEvent event) {
                 updateIndicatorText();
             }
         });
-        buttonLayout.addComponent(manyCB);
+        buttonLayout.addComponent(singleCB);
 
-        syncCB = new CheckBox("Synchronous");
+        fastCB = new CheckBox("Fast load");
+        fastCB.setDescription("Shorter content generation time");
+        fastCB.setImmediate(true);
+        buttonLayout.addComponent(fastCB);
+
+        syncCB = new CheckBox("No push");
         syncCB.setDescription("Make faked data loading synchronous (blocking)");
         syncCB.setImmediate(true);
         buttonLayout.addComponent(syncCB);
@@ -168,7 +176,13 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
         public void run() {
             // Add delay to act like DB query would be done here
             try {
-                Thread.sleep(100 + rand.nextInt(900));
+                int delay;
+                if(fastCB.getValue()) {
+                    delay = 50;
+                } else {
+                    delay = 100 + rand.nextInt(900);
+                }
+                Thread.sleep(delay);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -184,7 +198,7 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
     };
 
     protected void lazyLoad(LazyComponentRequestEvent event) {
-        boolean loadMany = manyCB.getValue().booleanValue();
+        boolean loadMany = !singleCB.getValue().booleanValue();
         // Check how many to add
         int load = loadMany ? 5 : 1;
         if(indexCounter + load >= MAX_NUMBER_OF_COMPONENTS) {
@@ -210,7 +224,7 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
      */
     protected void updateIndicatorText() {
         LazyLoadingIndicator indicator = (LazyLoadingIndicator)lazyLayout.getLazyLoadingIndicator();
-        boolean loadMany = manyCB.getValue().booleanValue();
+        boolean loadMany = !singleCB.getValue().booleanValue();
 
         if(loadMany) {
             int last = indexCounter + 5;

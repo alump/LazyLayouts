@@ -3,7 +3,9 @@ package org.vaadin.alump.lazylayouts.demo;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 import org.vaadin.alump.lazylayouts.LazyComponentProvider;
@@ -31,14 +33,19 @@ public class LazyWindowView extends LazyVerticalLayout implements View, LazyComp
         setSpacing(true);
         setMargin(true);
 
-        Button menu = new Button("Back to menu", new Button.ClickListener() {
+        HorizontalLayout buttons = new HorizontalLayout();
+        buttons.setSpacing(true);
+        addComponent(buttons);
+
+        Button menu = new Button(FontAwesome.BARS.getHtml(), new Button.ClickListener() {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 navigator.navigateTo(MenuView.VIEW_ID);
             }
         });
-        addComponent(menu);
+        menu.setHtmlContentAllowed(true);
+        buttons.addComponent(menu);
 
         Button openWindow = new Button("Open Window", new Button.ClickListener() {
 
@@ -47,7 +54,7 @@ public class LazyWindowView extends LazyVerticalLayout implements View, LazyComp
                 openWindow(++windowCounter);
             }
         });
-        addComponent(openWindow);
+        buttons.addComponent(openWindow);
     }
 
     private void openWindow(int windowIndex) {

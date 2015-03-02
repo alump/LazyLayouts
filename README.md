@@ -58,6 +58,13 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
  
 ## Release notes
 
+### Version 0.1.2
+- Improving demo application
+- Now depending on Vaadin 7.3
+
+### Version 0.1.1
+- Fixes compiling issues with Vaadin 7.3
+
 ### Version 0.1.0
 - Initial release, included LazyVerticalLayout
 - Scrolling parent most be Panel or Window
