@@ -4,10 +4,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.*;
 import org.vaadin.alump.lazylayouts.LazyComponentProvider;
 import org.vaadin.alump.lazylayouts.LazyComponentRequestEvent;
 import org.vaadin.alump.lazylayouts.LazyVerticalLayout;
@@ -19,7 +16,7 @@ import static org.vaadin.alump.lazylayouts.demo.ComponentGenerator.createCompone
 /**
  * Tests to use LazyVerticalLayout inside Windows
  */
-public class LazyWindowView extends LazyVerticalLayout implements View, LazyComponentProvider {
+public class LazyWindowView extends VerticalLayout implements View, LazyComponentProvider {
     public final static String VIEW_ID = "window";
 
     protected int windowCounter = 0;

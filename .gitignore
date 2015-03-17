@@ -3,3 +3,4 @@
 lazylayouts-addon/target
 lazylayouts-demo/target
 lazylayouts-demo/src/main/webapp/VAADIN/widgetsets/
+lazylayouts-demo/src/main/webapp/VAADIN/themes/demo/styles.scss.cache

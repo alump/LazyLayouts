@@ -35,6 +35,7 @@ public class DemoUI extends UI
         navigator.addView(MenuView.VIEW_ID, MenuView.class);
         navigator.addView(LazyVLView.VIEW_ID, LazyVLView.class);
         navigator.addView(LazyWindowView.VIEW_ID, LazyWindowView.class);
+        navigator.addView(TabSheetView.VIEW_ID, TabSheetView.class);
     }
 
 }

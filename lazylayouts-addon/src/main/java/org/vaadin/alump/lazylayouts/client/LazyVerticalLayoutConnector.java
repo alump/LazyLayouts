@@ -52,6 +52,12 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
 
         requestTimer.cancel();
 
+        removeScrollingHandlers();
+
+        super.onUnregister();
+    }
+
+    private void removeScrollingHandlers() {
         if(handlerRegistration != null) {
             handlerRegistration.removeHandler();
             handlerRegistration = null;
@@ -63,45 +69,51 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
             if(widget instanceof LazyScrollNotifier) {
                 ((LazyScrollNotifier) scrollerFollowed.getWidget()).removeLazyScrollListener(this);
             }
+            scrollerFollowed = null;
         }
-
-        super.onUnregister();
     }
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
 
-        if(scrollerFollowed == null) {
-            scrollerFollowed = resolveScrollingParent();
-            if(scrollerFollowed != null) {
-                attachScrollingEvents(scrollerFollowed);
-            } else {
-                LOGGER.severe("Failed to resolve scrolling parent!");
+        if(getParent() != null) {
+            if (scrollerFollowed == null) {
+                scrollerFollowed = resolveScrollingParent();
+                if (scrollerFollowed != null) {
+                    attachScrollingEvents(scrollerFollowed);
+                } else {
+                    LOGGER.severe("Failed to resolve scrolling parent!");
+                }
             }
+        } else {
+            removeScrollingHandlers();
         }
 
         waitingResponse = false;
 
         super.onConnectorHierarchyChange(event);
 
-        Widget indicator = getLazyLoadingIndicator();
-        if(indicator != null) {
-            indicator.getElement().getStyle().setOpacity(0.5);
-        }
+        if(getParent() != null) {
 
-        // Verify that we do not need to continue loading after hierarchy change
-        if(scrollingElement != null) {
-            Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-                @Override
-                public boolean execute() {
-                    if(!waitingResponse) {
-                        if(checkIfLazyRequestRequired(scrollingElement)) {
-                            sendLazyLoadRequest();
+            Widget indicator = getLazyLoadingIndicator();
+            if(indicator != null) {
+                indicator.getElement().getStyle().setOpacity(0.5);
+            }
+
+            // Verify that we do not need to continue loading after hierarchy change
+            if(scrollingElement != null) {
+                Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
+                    @Override
+                    public boolean execute() {
+                        if (!waitingResponse) {
+                            if (checkIfLazyRequestRequired(scrollingElement)) {
+                                sendLazyLoadRequest();
+                            }
                         }
+                        return false;
                     }
-                    return false;
-                }
-            }, DELAYED_CHECK_AFTER_CHANGE_MS);
+                }, DELAYED_CHECK_AFTER_CHANGE_MS);
+            }
         }
     }
 
@@ -137,7 +149,6 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
     protected ComponentConnector resolveScrollingParent() {
 
         if(getState().scrollingParent != null) {
-            LOGGER.severe("Use scrolling parent defined in State");
             return (ComponentConnector)getState().scrollingParent;
         }
 
@@ -212,7 +223,7 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
      */
     protected class LazyRequestTimer extends Timer {
 
-        public final static int REQUEST_DELAY_TIMER_MS = 100;
+        public final static int REQUEST_DELAY_TIMER_MS = 50;
 
         public LazyRequestTimer() {
 
@@ -224,12 +235,14 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
 
         @Override
         public void run() {
-            LOGGER.fine("Sending lazy loading request...");
-            Widget indicator = getLazyLoadingIndicator();
-            if(indicator != null) {
-                indicator.getElement().getStyle().setOpacity(1.0);
+            if(LazyVerticalLayoutConnector.this.isEnabled()) {
+                LOGGER.fine("Sending lazy loading request...");
+                Widget indicator = getLazyLoadingIndicator();
+                if (indicator != null) {
+                    indicator.getElement().getStyle().setOpacity(1.0);
+                }
+                getRpcProxy(LazyLayoutServerRpc.class).onLazyLoadRequest();
             }
-            getRpcProxy(LazyLayoutServerRpc.class).onLazyLoadRequest();
         }
     };
 

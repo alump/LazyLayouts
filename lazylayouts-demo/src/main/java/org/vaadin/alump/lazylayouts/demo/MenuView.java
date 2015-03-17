@@ -32,6 +32,7 @@ public class MenuView extends VerticalLayout implements View {
 
         addMenuButton("LazyVerticalLayout", "Demo and tests for LazyVerticalLayout", LazyVLView.VIEW_ID);
         addMenuButton("Inside Windows", "LazyLayouts inside Windows", LazyWindowView.VIEW_ID);
+        addMenuButton("Inside TabSheet", "LazyLayouts inside TabSheet (ticket #4)", TabSheetView.VIEW_ID);
     }
 
     private void addMenuButton(String caption, String description, final String viewId) {
