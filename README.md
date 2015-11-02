@@ -58,6 +58,9 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
  
 ## Release notes
 
+### Version 0.1.4
+- Adds multiple themes to test app to help testing
+
 ### Version 0.1.3
 - Fixes server side warnings when LazyLayout has TabSheet as parent
 

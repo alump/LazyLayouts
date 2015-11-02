@@ -34,32 +34,21 @@ public class LazyWindowView extends VerticalLayout implements View, LazyComponen
         buttons.setSpacing(true);
         addComponent(buttons);
 
-        Button menu = new Button(FontAwesome.BARS.getHtml(), new Button.ClickListener() {
-
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                navigator.navigateTo(MenuView.VIEW_ID);
-            }
-        });
+        Button menu = new Button(FontAwesome.BARS.getHtml(), event -> navigator.navigateTo(MenuView.VIEW_ID));
         menu.setHtmlContentAllowed(true);
         buttons.addComponent(menu);
 
-        Button openWindow = new Button("Open Window", new Button.ClickListener() {
-
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                openWindow(++windowCounter);
-            }
-        });
+        Button openWindow = new Button("Open Window", event -> openWindow(++windowCounter, event.getClientX(),
+                event.getClientY()));
         buttons.addComponent(openWindow);
     }
 
-    private void openWindow(int windowIndex) {
+    private void openWindow(int windowIndex, int x, int y) {
         final Window window = new Window();
         window.setWidth("400px");
         window.setHeight("80%");
         window.setCaption("Lazy Inside Window #" + windowIndex);
-
+        window.setPosition(x, y);
 
         LazyVerticalLayout lazyLayout = new LazyVerticalLayout();
         lazyLayout.setMargin(true);
@@ -77,8 +66,6 @@ public class LazyWindowView extends VerticalLayout implements View, LazyComponen
         lazyLayout.setData(new Integer(windowIndexCounter));
 
         UI.getCurrent().addWindow(window);
-        window.setPositionX(windowIndex * 10);
-        window.setPositionY(windowIndex * 10);
     }
 
     @Override

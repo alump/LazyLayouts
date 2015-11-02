@@ -1,19 +1,15 @@
-@import "../reindeer/reindeer.scss";
-
-$gray: #d1d1cf;
-$green: #40b527;
-$darkgreen: darken($green, 30%);
+@import "../valo/valo.scss";
 
 // Prefix all selectors in your theme with .demo
-.demo {
+.valobased {
 
-	// Include reindeer theme styles in your theme
-	@include reindeer;
+  // Include valo theme styles in your theme
+  @include valo;
 
-    .lazy-loaded-layout {
+  .lazy-loaded-layout {
 
 
-    }
+  }
 
   .header-label {
     font-size: 16px;

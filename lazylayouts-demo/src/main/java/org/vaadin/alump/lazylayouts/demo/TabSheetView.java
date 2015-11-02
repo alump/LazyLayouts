@@ -24,16 +24,11 @@ public class TabSheetView extends VerticalLayout implements View, LazyComponentP
         setSizeFull();
 
         HorizontalLayout buttonLayout = new HorizontalLayout();
-        buttonLayout.setMargin(true);
         buttonLayout.setWidth(100, Unit.PERCENTAGE);
         addComponent(buttonLayout);
 
-        Button menu = new Button(FontAwesome.BARS.getHtml(), new Button.ClickListener() {
-
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                navigator.navigateTo(MenuView.VIEW_ID);
-            }
+        Button menu = new Button(FontAwesome.BARS.getHtml(), event -> {
+            navigator.navigateTo(MenuView.VIEW_ID);
         });
         menu.setHtmlContentAllowed(true);
         buttonLayout.addComponent(menu);

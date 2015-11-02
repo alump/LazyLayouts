@@ -12,7 +12,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 
-@Theme("demo")
+@Theme("reindeerbased")
 @Push
 @Title("LazyLayouts Add-on Demo")
 @SuppressWarnings("serial")
