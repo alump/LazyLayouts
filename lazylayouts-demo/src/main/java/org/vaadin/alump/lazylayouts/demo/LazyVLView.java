@@ -1,10 +1,9 @@
 package org.vaadin.alump.lazylayouts.demo;
 
-import com.vaadin.data.Property;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import org.vaadin.alump.lazylayouts.LazyComponentProvider;
 import org.vaadin.alump.lazylayouts.LazyComponentRequestEvent;
@@ -43,14 +42,14 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
         buttonLayout.setSpacing(true);
         addComponent(buttonLayout);
 
-        Button menu = new Button(FontAwesome.BARS.getHtml(), new Button.ClickListener() {
+        Button menu = new Button(VaadinIcons.MENU.getHtml(), new Button.ClickListener() {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 navigator.navigateTo(MenuView.VIEW_ID);
             }
         });
-        menu.setHtmlContentAllowed(true);
+        menu.setCaptionAsHtml(true);
         menu.setDescription("Return to menu");
         buttonLayout.addComponent(menu);
 
@@ -67,35 +66,24 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
 
         singleCB = new CheckBox("Load one");
         singleCB.setDescription("Only provide one new item at each load");
-        singleCB.setImmediate(true);
-        singleCB.addValueChangeListener(new Property.ValueChangeListener() {
-            @Override
-            public void valueChange(Property.ValueChangeEvent event) {
-                updateIndicatorText();
-            }
-        });
+        singleCB.addValueChangeListener(event -> updateIndicatorText());
         buttonLayout.addComponent(singleCB);
 
         fastCB = new CheckBox("Fast load");
         fastCB.setDescription("Shorter content generation time");
-        fastCB.setImmediate(true);
         buttonLayout.addComponent(fastCB);
 
         syncCB = new CheckBox("No push");
         syncCB.setDescription("Make faked data loading synchronous (blocking)");
-        syncCB.setImmediate(true);
         buttonLayout.addComponent(syncCB);
 
         startCountTF = new TextField();
-        startCountTF.setInputPrompt("Count");
+        startCountTF.setPlaceholder("Count");
         startCountTF.setDescription("How many items are added at reset");
         startCountTF.setValue("" + startWith);
-        startCountTF.setImmediate(true);
         startCountTF.setWidth("50px");
-        startCountTF.addValueChangeListener(new Property.ValueChangeListener() {
-            @Override
-            public void valueChange(Property.ValueChangeEvent event) {
-                String string = event.getProperty().getValue().toString();
+        startCountTF.addValueChangeListener(event -> {
+                String string = event.getValue().toString();
                 try {
                     int newValue = Integer.valueOf(string);
                     if(newValue < 1 || newValue > MAX_NUMBER_OF_COMPONENTS) {
@@ -103,10 +91,9 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
                     }
                     startWith = newValue;
                 } catch (NumberFormatException e) {
-                    event.getProperty().setValue("" + startWith);
+                    ((TextField)event.getComponent()).setValue("" + startWith);
                 }
-            }
-        });
+            });
         buttonLayout.addComponent(startCountTF);
 
         panel = new Panel();

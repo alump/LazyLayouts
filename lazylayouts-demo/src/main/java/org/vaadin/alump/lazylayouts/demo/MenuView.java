@@ -37,12 +37,11 @@ public class MenuView extends VerticalLayout implements View {
 
         themeSelector = new ComboBox();
         themeSelector.setCaption("Theme");
-        themeSelector.addItem(VALO_BASED_THEME);
-        themeSelector.addItem(REINDEER_BASED_THEME);
-        themeSelector.setNullSelectionAllowed(false);
+        themeSelector.setEmptySelectionAllowed(false);
+        themeSelector.setItems(VALO_BASED_THEME);
         themeSelector.setTextInputAllowed(false);
         themeSelector.addValueChangeListener(e -> {
-            String value = e.getProperty().getValue().toString();
+            String value = e.getValue().toString();
             if(!value.equals(getUI().getTheme())) {
                 getUI().setTheme(value);
             }

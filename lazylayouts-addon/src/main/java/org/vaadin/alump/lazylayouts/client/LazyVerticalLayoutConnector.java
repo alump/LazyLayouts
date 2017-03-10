@@ -20,7 +20,7 @@ import org.vaadin.alump.lazylayouts.LazyVerticalLayout;
 import java.util.logging.Logger;
 
 /**
- * Created by alump on 16/10/14.
+ * Connector for LazyVerticalLayout
  */
 @Connect(LazyVerticalLayout.class)
 public class LazyVerticalLayoutConnector extends VerticalLayoutConnector implements LazyScrollListener {

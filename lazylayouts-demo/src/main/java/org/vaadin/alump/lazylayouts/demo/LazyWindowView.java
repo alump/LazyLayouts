@@ -1,9 +1,9 @@
 package org.vaadin.alump.lazylayouts.demo;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import org.vaadin.alump.lazylayouts.LazyComponentProvider;
 import org.vaadin.alump.lazylayouts.LazyComponentRequestEvent;
@@ -34,8 +34,8 @@ public class LazyWindowView extends VerticalLayout implements View, LazyComponen
         buttons.setSpacing(true);
         addComponent(buttons);
 
-        Button menu = new Button(FontAwesome.BARS.getHtml(), event -> navigator.navigateTo(MenuView.VIEW_ID));
-        menu.setHtmlContentAllowed(true);
+        Button menu = new Button(VaadinIcons.MENU.getHtml(), event -> navigator.navigateTo(MenuView.VIEW_ID));
+        menu.setCaptionAsHtml(true);
         buttons.addComponent(menu);
 
         Button openWindow = new Button("Open Window", event -> openWindow(++windowCounter, event.getClientX(),
@@ -48,7 +48,8 @@ public class LazyWindowView extends VerticalLayout implements View, LazyComponen
         window.setWidth("400px");
         window.setHeight("80%");
         window.setCaption("Lazy Inside Window #" + windowIndex);
-        window.setPosition(x, y);
+        window.setPositionX(x);
+        window.setPositionY(y);
 
         LazyVerticalLayout lazyLayout = new LazyVerticalLayout();
         lazyLayout.setMargin(true);

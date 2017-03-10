@@ -1,9 +1,9 @@
 package org.vaadin.alump.lazylayouts.demo;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import org.vaadin.alump.lazylayouts.LazyComponentContainer;
 import org.vaadin.alump.lazylayouts.LazyComponentProvider;
@@ -27,10 +27,10 @@ public class TabSheetView extends VerticalLayout implements View, LazyComponentP
         buttonLayout.setWidth(100, Unit.PERCENTAGE);
         addComponent(buttonLayout);
 
-        Button menu = new Button(FontAwesome.BARS.getHtml(), event -> {
+        Button menu = new Button(VaadinIcons.MENU.getHtml(), event -> {
             navigator.navigateTo(MenuView.VIEW_ID);
         });
-        menu.setHtmlContentAllowed(true);
+        menu.setCaptionAsHtml(true);
         buttonLayout.addComponent(menu);
 
         TabSheet tabSheet = new TabSheet();
