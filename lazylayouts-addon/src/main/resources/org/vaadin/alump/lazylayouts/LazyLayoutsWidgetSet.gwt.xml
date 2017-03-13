@@ -3,10 +3,7 @@
 	<!-- WS Compiler: manually edited -->
 
 	<!-- Inherit DefaultWidgetSet -->
-	<inherits name="com.vaadin.DefaultWidgetSet" /> 
-
-	<!-- Widget styles in public -directory -->
-	<stylesheet src="lazylayouts.css"/>
+	<inherits name="com.vaadin.DefaultWidgetSet" />
 
 	<!-- Replacing client side widgets to allow hooking of scroll events -->
 	<replace-with class="org.vaadin.alump.lazylayouts.client.LazyPanel">

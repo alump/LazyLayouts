@@ -5,7 +5,7 @@
 	<groupId>org.vaadin.alump.lazylayouts</groupId>
 	<artifactId>lazylayouts-addon</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>0.2.0</version>
 	<name>LazyLayouts</name>
 
 	<properties>
@@ -20,6 +20,8 @@
 		<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 		<Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
 		<Vaadin-Addon>${artifactId}-${project.version}.jar</Vaadin-Addon>
+		<Vaadin-Stylesheets>VAADIN/addons/lazylayouts/lazylayouts.scss</Vaadin-Stylesheets>
+		<Vaadin-Widgetset>org.vaadin.alump.lazylayouts.LazyLayoutsWidgetSet</Vaadin-Widgetset>
 	</properties>
 
 	<organization>
@@ -127,7 +129,8 @@
 							<!-- Package format version - do not change -->
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
 							<Vaadin-License-Title>${Vaadin-License-Title}</Vaadin-License-Title>
-							<Vaadin-Widgetsets>org.vaadin.alump.lazylayouts.LazyLayoutsWidgetSet</Vaadin-Widgetsets>
+							<Vaadin-Widgetsets>${Vaadin-Widgetset}</Vaadin-Widgetsets>
+							<Vaadin-Stylesheets>${Vaadin-Stylesheets}</Vaadin-Stylesheets>
 						</manifestEntries>
 					</archive>
 				</configuration>

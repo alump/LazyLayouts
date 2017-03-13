@@ -38,7 +38,6 @@ public class LazyVLView extends VerticalLayout implements View, LazyComponentPro
         setSizeFull();
 
         HorizontalLayout buttonLayout = new HorizontalLayout();
-        buttonLayout.setMargin(true);
         buttonLayout.setSpacing(true);
         addComponent(buttonLayout);
 

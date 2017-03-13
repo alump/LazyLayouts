@@ -60,6 +60,7 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 
 ### Version 0.2.0
 - Moved to use and support Vaadin 8
+- Addon uses scss theming now, make sure your project import and include addons scss
 
 ### Version 0.1.3
 - Fixes server side warnings when LazyLayout has TabSheet as parent

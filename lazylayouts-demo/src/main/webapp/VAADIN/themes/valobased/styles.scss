@@ -1,4 +1,5 @@
 @import "../valo/valo.scss";
+@import "addons.scss";
 
 // Prefix all selectors in your theme with .demo
 .valobased {
@@ -6,8 +7,10 @@
   // Include valo theme styles in your theme
   @include valo;
 
-  .lazy-loaded-layout {
+  // Include addons (including lazylayouts)
+  @include addons;
 
+  .lazy-loaded-layout {
 
   }
 
