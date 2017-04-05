@@ -1,9 +1,11 @@
 package org.vaadin.alump.lazylayouts;
 
+import java.io.Serializable;
+
 /**
  * Event created when client requires more components to show
  */
-public class LazyComponentRequestEvent {
+public class LazyComponentRequestEvent implements Serializable {
 
     private LazyComponentContainer container;
 
