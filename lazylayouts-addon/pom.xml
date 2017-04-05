@@ -5,7 +5,7 @@
 	<groupId>org.vaadin.alump.lazylayouts</groupId>
 	<artifactId>lazylayouts-addon</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.1</version>
+	<version>0.2.2-SNAPSHOT</version>
 	<name>LazyLayouts</name>
 
 	<properties>
@@ -26,7 +26,7 @@
 
 	<organization>
 		<name>Sami Viitanen</name>
-		<url>https://github.com/mygithubaccount/MyComponent/</url>
+		<url>https://github.com/alump/LazyLayouts/</url>
 	</organization>
 
 	<scm>

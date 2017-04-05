@@ -1,4 +1,4 @@
-# LazyLayouts Add-on for Vaadin 7
+# LazyLayouts Add-on for Vaadin
 
 LazyLayout is an UI component add-on for Vaadin 7. It offers layouts that will provide on-demand content callbacks to
 application logic. This allows to optimize DB queries to only provide handful of responses needed to view page full of
@@ -6,7 +6,7 @@ results.
 
 ## Build status
 
-[![Build Status](http://siika.fi:8888/jenkins/job/LazyLayouts%20(Vaadin)/badge/icon)](http://siika.fi:8888/jenkins/job/LazyLayouts%20(Vaadin)/)
+[![Build Status](https://siika.fi/jenkins/job/LazyLayouts%20(Vaadin)/badge/icon)](https://siika.fi/jenkins/job/LazyLayouts%20(Vaadin)/)
 
 ## Online demo
 
@@ -64,6 +64,9 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 ### Version 0.2.0
 - Moved to use and support Vaadin 8
 - Addon uses scss theming now, make sure your project import and include addons scss
+
+### Version 0.1.4 (2017-04-04)
+- Backported fix from 0.2.1: Add extends serializable to interfaces. Issue #9
 
 ### Version 0.1.3
 - Fixes server side warnings when LazyLayout has TabSheet as parent
