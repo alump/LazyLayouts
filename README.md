@@ -58,6 +58,12 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
  
 ## Release notes
 
+### Version 0.1.4 (TBD)
+- Add extends serializable to interfaces. Issue #9
+
+### Version 0.1.3
+- Fixes server side warnings when LazyVerticalLayout had TabSheet as grandparent in component hierarchy
+
 ### Version 0.1.2
 - Improving demo application
 - Now depending on Vaadin 7.3
