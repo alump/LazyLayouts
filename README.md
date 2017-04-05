@@ -58,7 +58,7 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
  
 ## Release notes
 
-### Version 0.1.4 (TBD)
+### Version 0.1.4 (2017-04-04)
 - Add extends serializable to interfaces. Issue #9
 
 ### Version 0.1.3
