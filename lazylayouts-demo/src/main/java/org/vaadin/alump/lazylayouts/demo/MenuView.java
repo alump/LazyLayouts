@@ -11,14 +11,16 @@ import com.vaadin.ui.*;
  */
 public class MenuView extends VerticalLayout implements View {
 
+    /*
     public final static String VALO_BASED_THEME = "valobased";
     public final static String REINDEER_BASED_THEME = "reindeerbased";
+    */
 
     // MenuView is default, so keep empty id
     public final static String VIEW_ID = "";
 
     private Navigator navigator;
-    private ComboBox themeSelector;
+    //private ComboBox themeSelector;
 
     public MenuView() {
         setSpacing(true);
@@ -66,7 +68,7 @@ public class MenuView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-        themeSelector.setValue(getUI().getTheme());
+        //themeSelector.setValue(getUI().getTheme());
         navigator = event.getNavigator();
     }
 }
