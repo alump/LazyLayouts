@@ -10,7 +10,7 @@ results.
 
 ## Online demo
 
-Try the add-on demo at http://siika.fi:8080/LazyLayoutsDemo
+Try the add-on demo at http://app.siika.fi/LazyLayoutsDemo
 
 ## Download release
 
