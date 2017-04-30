@@ -6,7 +6,7 @@ results.
 
 ## Build status
 
-[![Build Status](https://siika.fi/jenkins/job/LazyLayouts%20(Vaadin)/badge/icon)](https://siika.fi/jenkins/job/LazyLayouts%20(Vaadin)/)
+[![Build Status](https://epic.siika.fi/jenkins/job/LazyLayouts%20(Vaadin)/badge/icon)](https://epic.siika.fi/jenkins/job/LazyLayouts%20(Vaadin)/)
 
 ## Online demo
 
