@@ -36,6 +36,7 @@ public class MenuView extends VerticalLayout implements View {
         addMenuButton("LazyVerticalLayout", "Demo and tests for LazyVerticalLayout", LazyVLView.VIEW_ID);
         addMenuButton("Inside Windows", "LazyLayouts inside Windows", LazyWindowView.VIEW_ID);
         addMenuButton("Inside TabSheet", "LazyLayouts inside TabSheet (ticket #4)", TabSheetView.VIEW_ID);
+        addMenuButton("Inside SplitPanel", "LazyLayouts inside SplitPanel and Panel (ticket #7)", Issue7View.VIEW_ID);
 
         /*
         themeSelector = new ComboBox();
