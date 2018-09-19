@@ -1,3 +1,6 @@
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/lazylayouts)
+[![Stars on Vaadin Directory](https://img.shields.io/vaadin-directory/star/lazylayouts.svg)](https://vaadin.com/directory/component/lazylayouts)
+
 # LazyLayouts Add-on for Vaadin
 
 LazyLayout is an UI component add-on for Vaadin 7. It offers layouts that will provide on-demand content callbacks to
