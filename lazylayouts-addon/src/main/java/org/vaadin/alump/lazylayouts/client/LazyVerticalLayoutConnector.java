@@ -11,6 +11,7 @@ import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.StateChangeEvent;
+import com.vaadin.client.ui.PostLayoutListener;
 import com.vaadin.client.ui.VWindow;
 import com.vaadin.client.ui.layout.MayScrollChildren;
 import com.vaadin.client.ui.orderedlayout.VerticalLayoutConnector;
@@ -23,13 +24,14 @@ import java.util.logging.Logger;
  * Connector for LazyVerticalLayout
  */
 @Connect(LazyVerticalLayout.class)
-public class LazyVerticalLayoutConnector extends VerticalLayoutConnector implements LazyScrollListener {
+public class LazyVerticalLayoutConnector extends VerticalLayoutConnector implements LazyScrollListener, PostLayoutListener {
 
     private final static Logger LOGGER = Logger.getLogger(LazyVerticalLayoutConnector.class.getName());
 
-    private ComponentConnector scrollerFollowed;
-    private Element scrollingElement;
+    protected ComponentConnector scrollerFollowed;
+    protected Element scrollingElement;
     protected boolean waitingResponse = false;
+    protected boolean mustRelayout = false;
     private HandlerRegistration handlerRegistration;
 
     /**
@@ -50,7 +52,7 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
     @Override
     public void onUnregister() {
 
-        requestTimer.cancel();
+        //requestTimer.cancel();
 
         removeScrollingHandlers();
 
@@ -90,35 +92,34 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
         }
 
         waitingResponse = false;
-
         super.onConnectorHierarchyChange(event);
+    }
 
-        if(getParent() != null) {
-
+    @Override
+    public void postLayout() {
+        if(getParent() != null && mustRelayout) {
             Widget indicator = getLazyLoadingIndicator();
             if(indicator != null) {
                 indicator.getElement().getStyle().setOpacity(0.5);
             }
 
             // Verify that we do not need to continue loading after hierarchy change
-            if(scrollingElement != null) {
-                Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-                    @Override
-                    public boolean execute() {
-                        if (!waitingResponse) {
-                            if (checkIfLazyRequestRequired(scrollingElement)) {
-                                sendLazyLoadRequest();
-                            }
-                        }
-                        return false;
+            if(scrollingElement != null && getState().lazyLoading) {
+                if (!waitingResponse) {
+                    if (checkIfLazyRequestRequired(scrollingElement)) {
+                        sendLazyLoadRequest();
                     }
-                }, DELAYED_CHECK_AFTER_CHANGE_MS);
+                }
             }
+            mustRelayout = false;
         }
     }
 
     @Override
     public void onStateChanged(StateChangeEvent event) {
+        if (event.hasPropertyChanged("childData")) {
+            mustRelayout = true;
+        }
         super.onStateChanged(event);
 
         if(event.hasPropertyChanged("lazyLoading")) {
@@ -211,16 +212,21 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
      * Sends lazy component loading request to server
      */
     protected void sendLazyLoadRequest() {
-        if(!waitingResponse) {
+        if(!waitingResponse && LazyVerticalLayoutConnector.this.isEnabled()) {
             waitingResponse = true;
-            // Delay so other signals will be sent before
-            requestTimer.schedule();
+            LOGGER.fine("Sending lazy loading request...");
+            Widget indicator = getLazyLoadingIndicator();
+            if (indicator != null) {
+                indicator.getElement().getStyle().setOpacity(1.0);
+            }
+            getRpcProxy(LazyLayoutServerRpc.class).onLazyLoadRequest();
         }
     }
 
     /**
      * Timer used to delay request until scrolling stops
      */
+    /*
     protected class LazyRequestTimer extends Timer {
 
         public final static int REQUEST_DELAY_TIMER_MS = 50;
@@ -247,12 +253,12 @@ public class LazyVerticalLayoutConnector extends VerticalLayoutConnector impleme
     };
 
     protected LazyRequestTimer requestTimer = new LazyRequestTimer();
-
+*/
     /**
      * Gets lazy loading indicator
      * @return Loading indicator widget instance if defined
      */
-    private Widget getLazyLoadingIndicator() {
+    protected Widget getLazyLoadingIndicator() {
         ComponentConnector connector = (ComponentConnector)getState().lazyLoadingIndicator;
         if(connector == null) {
             return null;
